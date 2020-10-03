@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>AngularApp</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/darkly/bootstrap.min.css">
+  <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ -->
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- <script type="text/javascript" src="accordion.js"></script> -->
+</head>
+<style>
+  body {
+    font-family: 'Roboto';
+    line-height: 1.7;
+  }
+
+  .container {
+    margin: 150px auto;
+  }
+</style>
+
+<body class="mat-typography">
+  <app-root></app-root>
+  <div class="container">
+    <h1> Tabs To Accordion Demo</h1>
+    
+    <!-- Bootstrap Tabs -->
+    <ul id="tabs" class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#t1">Home</a></li>
+      <li><a data-toggle="tab" href="#t2">Notification</a></li>
+      <li><a data-toggle="tab" href="#t3">Profile</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="t1" class="tab-pane fade in active">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </div>
+      <div id="t2" class="tab-pane fade">
+        Donec pretium nibh velit, eget lobortis dui maximus nec. Nulla egestas sem et ante tempus, eget porta eros
+        pulvinar. Morbi nec interdum elit, nec dictum ante. Suspendisse eget ipsum quis orci faucibus consequat id non
+        turpis.
+      </div>
+      <div id="t3" class="tab-pane fade">
+        Cras ornare quam id suscipit pharetra. Duis quis auctor dui. Nunc dictum lacinia dapibus. Quisque sed rutrum
+        sapien, sagittis egestas urna. Suspendisse pulvinar efficitur est, sit amet gravida ante hendrerit eget.
+      </div>
+    </div>
+    <!-- /Bootstrap Tabs -->
+    <!-- Bootstrap Accordion -->
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"></div>
+    <!-- /Bootstrap Accordion -->
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      getAccordion("#tabs", 800);
+      function getAccordion(element_id, screen) {
+        $(window).resize(function () { location.reload(); });
+
+        if ($(window).width() < screen) {
+          var concat = '';
+          obj_tabs = $(element_id + " li").toArray();
+          obj_cont = $(".tab-content .tab-pane").toArray();
+          jQuery.each(obj_tabs, function (n, val) {
+            concat += '<div id="' + n + '" class="panel panel-default">';
+            concat += '<div class="panel-heading" role="tab" id="heading' + n + '">';
+            concat += '<h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse' + n + '" aria-expanded="false" aria-controls="collapse' + n + '">' + val.innerText + '</a></h4>';
+            concat += '</div>';
+            concat += '<div id="collapse' + n + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + n + '">';
+            concat += '<div class="panel-body">' + obj_cont[n].innerHTML + '</div>';
+            concat += '</div>';
+            concat += '</div>';
+          });
+          $("#accordion").html(concat);
+          $("#accordion").find('.panel-collapse:first').addClass("in");
+          $("#accordion").find('.panel-title a:first').attr("aria-expanded", "true");
+          $(element_id).remove();
+          $(".tab-content").remove();
+        }
+      }
+    });
+  </script>
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36251023-1']);
+    _gaq.push(['_setDomainName', 'jqueryscript.net']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+
+</body>
+
+</html>
